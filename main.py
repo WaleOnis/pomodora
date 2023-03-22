@@ -14,7 +14,9 @@ laps = 0
 timer = None
 
 # ---------------------------- TIMER RESET ------------------------------- #
-
+def reset_the_time():
+    window.after_cancel(timer)
+    # 00:00
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 
@@ -46,7 +48,8 @@ def count_down(count):
 
     canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec}")
     if count > 0:
-        window.after(1000, count_down, count - 1)
+        global timer
+        timer = window.after(1000, count_down, count - 1)
     else:
         start_timer()
         c_marks = ""
@@ -78,7 +81,7 @@ start_button = Button(text="Start", font=(FONT_NAME, 10, "bold"), command=start_
 start_button.grid(row=2, column=0)
 
 # create reset button widget
-reset_button = Button(text="Reset", font=(FONT_NAME, 10, "bold"))
+reset_button = Button(text="Reset", font=(FONT_NAME, 10, "bold"), command=reset_the_time)
 reset_button.grid(row=2, column=2)
 
 # create a check mark
