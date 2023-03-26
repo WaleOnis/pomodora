@@ -16,7 +16,11 @@ timer = None
 # ---------------------------- TIMER RESET ------------------------------- #
 def reset_the_time():
     window.after_cancel(timer)
-    # 00:00
+    canvas.itemconfig(timer_text, text="00:00")
+    timer_id_label.config(text="Timer")
+    check_marks.config(text="")
+    global laps
+    laps = 0
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 
@@ -56,7 +60,7 @@ def count_down(count):
         working_sessions = math.floor(laps/2)
         for _ in range(working_sessions):
             c_marks += "✔"
-        check_mark.config(text=c_marks)
+        check_marks.config(text=c_marks)
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -85,7 +89,7 @@ reset_button = Button(text="Reset", font=(FONT_NAME, 10, "bold"), command=reset_
 reset_button.grid(row=2, column=2)
 
 # create a check mark
-check_mark = Label(font=(FONT_NAME, 20, "bold"), bg=YELLOW, fg=GREEN)
-check_mark.grid(row=3, column=1)
+check_marks = Label(font=(FONT_NAME, 20, "bold"), bg=YELLOW, fg=GREEN)
+check_marks.grid(row=3, column=1)
 
 window.mainloop()
